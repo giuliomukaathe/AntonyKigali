@@ -9,7 +9,12 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+# Load environment variables from .env file
+# Load environment variables from .env file
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+from decouple import config
 from pathlib import Path, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o!78r*d5ivvz+()g4#566c69e8fd!8^%axic*dpeg-api2$gg%'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -77,10 +82,10 @@ WSGI_APPLICATION = 'antony.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Antony',
-        'USER': 'root',
-        'PASSWORD': '0740538807mM-',
-        'HOST': 'localhost',
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
         'PORT': '3306',
     }
 }
@@ -136,9 +141,9 @@ MEDIA_ROOT =os.path.join(BASE_DIR, 'mdeia')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # gmail settings
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST='smtp.gmail.com'
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER='tonykigsaka@gmail.com'
-EMAIL_HOST_PASSWORD='mwrffphzmbhlxjxo'
+EMAIL_USE_TLS = 'True'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
