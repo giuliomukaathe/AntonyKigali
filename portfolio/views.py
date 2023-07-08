@@ -36,3 +36,4 @@ def contactsendmail(request):
     
     works = my_work.objects.all()
     return render(request, 'index.html', {'form': form, 'works': works})
+
